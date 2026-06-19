@@ -106,3 +106,18 @@ button:hover{
   margin:10px;
 }
 
+.stats{
+  display:flex;
+  gap:30px;
+
+  background:#222;
+
+  padding:10px 20px;
+
+  border-radius:10px;
+}
+
+.stats p{
+  margin:0;
+  font-weight:bold;
+}
