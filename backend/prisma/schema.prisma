@@ -1,0 +1,45 @@
+generator client {
+ provider = "prisma-client-js"
+}
+
+datasource db {
+ provider = "postgresql"
+ url      = env("DATABASE_URL")
+}
+
+model Image {
+ id          Int @id @default(autoincrement())
+ imagePath String @unique
+
+ rating      Float @default(1500)
+
+ wins        Int @default(0)
+ losses      Int @default(0)
+ draws       Int @default(0)
+
+ comparisons Int @default(0)
+
+ createdAt   DateTime @default(now())
+
+ leftComparisons Comparison[] @relation("LeftImage")
+ rightComparisons Comparison[] @relation("RightImage")
+}
+
+
+
+model Comparison {
+
+  id Int @id @default(autoincrement())
+
+  leftImageId Int
+  rightImageId Int
+
+  result String
+
+  createdAt DateTime @default(now())
+
+  leftImage Image @relation("LeftImage", fields:[leftImageId], references:[id])
+  rightImage Image @relation("RightImage", fields:[rightImageId], references:[id])
+
+
+}
